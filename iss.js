@@ -81,12 +81,11 @@ const fetchISSFlyOverTimes = function (coordinates, callback) {
   });
 };
 
-// iss.js
-
 /**
  * Orchestrates multiple API requests in order to determine the next 5 upcoming ISS fly overs for the user's current location.
  * Uses callback waterfall method
  */ 
+
 const nextISSTimesForMyLocation = function(callback) {
   // Call fetchMyIP to get the IP address
   fetchMyIP((error, ip) => {
