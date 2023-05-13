@@ -1,5 +1,5 @@
 // Import the 'fetchMyIP', 'fetchCoordsByIP', and 'fetchISSFlyOverTimes' functions from the 'iss' module
-const { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes } = require('./iss');
+const { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes, nextISSTimesForMyLocation } = require('./iss');
 
 // Call the 'fetchMyIP' function to get the IP address of the user's computer
 fetchMyIP((error, ip) => {
@@ -35,4 +35,17 @@ fetchMyIP((error, ip) => {
       console.log('ISS Flyover Times:', passes);
     });
   });
+
+  nextISSTimesForMyLocation((error, passTimes) => {
+    if (error) {
+      return console.log("It didn't work!", error);
+    }
+  
+    // Success! Print out the flyover times
+    for (const pass of passTimes) {
+      const datetime = new Date(pass.risetime * 1000);
+      console.log(`Next pass at ${datetime} for ${pass.duration} seconds!`);
+    }
+  });
+
 });
